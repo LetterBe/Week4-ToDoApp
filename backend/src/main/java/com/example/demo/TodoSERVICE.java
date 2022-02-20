@@ -17,11 +17,19 @@ public class TodoSERVICE {
 
     }
 
-    public void deleteItem(String id) {
-        todoREPO.deleteItem(id);
+    public void deleteItem(String idItem) {
+        todoREPO.deleteItem(idItem);
     }
 
-    public List<TodoItem> listOfTasks() {
-        return todoREPO.listOfTasks();
+    public List<TodoItem> listOfItems() {
+        return todoREPO.listOfItems();
+    }
+
+    public TodoItem listOneItem(String idItem) {
+        return todoREPO.listOneItem(idItem).orElseThrow();
+    }
+
+    public void setTaskDone(String idItem) {
+        listOneItem(idItem).setTaskDone(false);
     }
 }

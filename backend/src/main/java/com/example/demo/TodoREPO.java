@@ -2,7 +2,9 @@ package com.example.demo;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class TodoREPO {
@@ -20,7 +22,16 @@ public class TodoREPO {
         todoItems.removeIf(item -> item.getId().matches(id));
     }
 
-    public List<TodoItem> listOfTasks() {
+    public List<TodoItem> listOfItems() {
         return todoItems;
+    }
+
+    public Optional<TodoItem> listOneItem(String id) {
+        for (TodoItem todoId : todoItems) {
+            if (todoId.getId() == id) {
+                return Optional.of(todoId);
+            }
+        }
+        return null;
     }
 }

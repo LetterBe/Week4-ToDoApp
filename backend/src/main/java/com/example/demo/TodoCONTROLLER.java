@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 @RestController
-@RequestMapping("/todo-app")
+@RequestMapping("/todos")
 public class TodoCONTROLLER {
 
     private List<String> greetings = Arrays.asList("Hi", "Bom dia");
@@ -18,6 +18,7 @@ public class TodoCONTROLLER {
     }
 
     @GetMapping(path = "/api/greeting", produces = "text/plain")
+    // @RequestMapping(method = RequestMethod.GET)
     public String hello() {
         Random rand = new Random();
         return greetings.get(rand.nextInt(greetings.size()));
@@ -26,13 +27,22 @@ public class TodoCONTROLLER {
     public void addNewItem(@RequestBody TodoItem todoItem ){
         todoSERVICE.addItem(todoItem);
     }
-    @DeleteMapping("/{id}")
-    public void deleteOneItem(@PathVariable String id){
-        todoSERVICE.deleteItem(id);
+    @DeleteMapping("/{taskdelete}")
+    public void deleteOneItem(@PathVariable String idItem){
+        todoSERVICE.deleteItem(idItem);
     }
-    @GetMapping("/{listoftasks}")
-    public List<TodoItem> listOfTasks(){
-        return todoSERVICE.listOfTasks();
+    @GetMapping()
+    public List<TodoItem> listOfItems(){
+        return todoSERVICE.listOfItems();
+    }
+    @GetMapping("/{idItem}")
+    public TodoItem listOneItem(@PathVariable String idItem){
+        return todoSERVICE.listOneItem(idItem);
+    }
+    @PutMapping("/{idItem}")
+    public void setTaskDone(@PathVariable String idItem){
+         todoSERVICE.setTaskDone(idItem);
+        
     }
 
 
