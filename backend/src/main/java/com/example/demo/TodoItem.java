@@ -29,7 +29,8 @@ public class TodoItem {
     public void setTask(String task) {
         this.task = task;
     }
-    public boolean whenTaskDone (){
+
+    public boolean isTaskDone (){
         return taskDone;
     }
 

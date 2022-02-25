@@ -8,6 +8,9 @@ import java.util.Optional;
 
 @Repository
 public class TodoREPO {
+
+    // You should give todoItems a value,  with a new List. Then you don't need a constructor and will not
+    // be in danger of a NullPointer.
     private List<TodoItem> todoItems;
 
     public TodoREPO(List<TodoItem> todoItems) {
@@ -28,10 +31,13 @@ public class TodoREPO {
 
     public Optional<TodoItem> listOneItem(String id) {
         for (TodoItem todoId : todoItems) {
+            //IntelliJ should warn you in the next line. == is only for primitive types. There is an option to check if
+            //objects are equal.
             if (todoId.getId() == id) {
                 return Optional.of(todoId);
             }
         }
+        //Since you're already using optionals, don't return a simple null. Better would be an empty optional.
         return null;
     }
 }
